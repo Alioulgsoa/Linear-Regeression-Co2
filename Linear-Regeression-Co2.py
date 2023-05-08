@@ -54,6 +54,7 @@ test = cdf[~msk] #testing DataSet
 train.head(3)
 test.head(3)
 
+#I-Model to predict CO2EMISSIONS from ENGINESIZE
 
 #Modeling Using sklearn package to model data
 from sklearn import linear_model
@@ -87,6 +88,21 @@ print("Residual sum of squares (MSE): %.2f" % np.mean((test_y_ - test_y) ** 2))
 print("R2-score: %.2f" % r2_score(test_y , test_y_) )
 
 
+#II-Model to predict CO2EMISSIONS from FUELCONSUMPTION_COMB
+
+#split Data
+train_x= train[["FUELCONSUMPTION_COMB"]]
+test_x =test[["FUELCONSUMPTION_COMB"]]
+
+#Model
+regr =linear_model.linearRegression() # in sklearn
+regr.fit (train_x ,train_y) # train_y it's training Dataset on target CO2EMISSINS
+
+#Predictions
+predictions =regr.predict(test_x)
+
+#Evaluation 
+print("R2-score: %.2f" % r2_score(test_y , predictions) )
 
 
 
